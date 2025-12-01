@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BN 產生小工具</title>
+
+    <!-- Google Tag Manager for BN Tool App tracking (GTM-N8VL4XS) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N8VL4XS');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- 載入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .camp-banner-container {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+                "Noto Color Emoji";
+        }
+        .image-placeholder-box {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .cta-button-custom {
+            background-color: #f90281;
+        }
+        .cta-button-custom:hover {
+            background-color: #e10277;
+        }
+        .text-cta-custom {
+            color: #f90281;
+        }
+        textarea.code-output {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                "Liberation Mono", "Courier New", monospace;
+        }
+        .w-360 {
+            width: 360px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Google Tag Manager (noscript) for BN Tool App tracking (GTM-N8VL4XS) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8VL4XS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="max-w-6xl mx-auto py-6 px-4">
+        <h1 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4">
+            製作票券 BN 小工具 🎟️ 
+        </h1>
+        <p class="text-sm text-slate-600 mb-6">
+            左邊輸入文案與圖片網址，右邊會即時預覽，下方會自動產出可貼到小工具的 HTML 程式碼。
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-5 space-y-4">
+                <h2 class="text-lg font-semibold text-slate-800 mb-2">填入 BN 資訊</h2>
+
+                <div class="space-y-1">
+                    <label for="titleInput" class="block text-sm font-medium text-slate-700">標題</label>
+                    <input
+                        id="titleInput"
+                        type="text"
+                        class="w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-sm bg-slate-100"
+                        value="數感實驗室冬令營優惠折扣碼"
+                    />
+                </div>
+
+                <!-- 親子天下 Premium 會員專屬！此句已硬編碼，不可更改 -->
+
+                <div class="space-y-1">
+                    <label for="bodyInput" class="block text-sm font-medium text-slate-700">
+                        內文
+                    </label>
+                    <textarea
+                        id="bodyInput"
+                        rows="3"
+                        class="w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-sm bg-slate-100"
+                    >數感實驗室冬令營 $400 優惠折扣碼（適用於官網上數感實驗室、美數學院舉辦之 2026 冬令營）</textarea>
+                </div>
+
+                <div class="space-y-1">
+                    <label for="buttonTextInput" class="block text-sm font-medium text-slate-700">
+                        按鈕文字
+                    </label>
+                    <select
+                        id="buttonTextInput"
+                        class="w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-sm bg-slate-100 p-2"
+                    >
+                        <option value="立即領取免費票券">立即領取免費票券</option>
+                        <option value="立即領取專屬優惠" selected>立即領取專屬優惠</option>
+                        <option value="立即參加限時抽票活動">立即參加限時抽票活動</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label for="buttonUrlInput" class="block text-sm font-medium text-slate-700">
+                        按鈕連結 URL
+                    </label>
+                    <input
+                        id="buttonUrlInput"
+                        type="text"
+                        class="w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-sm bg-slate-100"
+                        value="https://site.parenting.com.tw/home/coupon-1929"
+                    />
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-sm font-medium text-slate-700">
+                        圖片網址
+                    </label>
+                    <div class="space-y-1">
+                        <input
+                            id="imageUrlInput"
+                            type="text"
+                            placeholder="貼上圖片網址 (e.g. https://...)"
+                            class="w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-sm bg-slate-100"
+                            value="https://placehold.co/160x160/f90281/ffffff?text=Image+Placeholder"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    id="copyCodeBtn"
+                    type="button"
+                    class="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 active:scale-[0.98] transition"
+                >
+                    複製程式碼
+                </button>
+                <p id="copyNotice" class="text-xs text-emerald-600 mt-1 hidden">
+                    ✅ 已複製程式碼！
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-lg font-semibold text-slate-800">即時預覽</h2>
+
+                <div id="desktopPreviewContainer" class="max-w-xl mx-auto camp-banner-container bg-white rounded-xl border border-gray-100 overflow-hidden shadow-lg">
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-sm font-medium text-slate-700">
+                        HTML 輸出程式碼
+                    </h3>
+                    <textarea
+                        id="codeOutput"
+                        rows="16"
+                        class="code-output w-full rounded-lg border-slate-300 focus:border-sky-500 focus:ring-sky-500 text-xs md:text-sm p-3 bg-slate-900 text-slate-50"
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GTM_ID = 'GTM-N8VL4XS';
+        const FIXED_HIGHLIGHT_TEXT = "親子天下 Premium 會員專屬！";
+
+        const titleInput = document.getElementById("titleInput");
+        const bodyInput = document.getElementById("bodyInput");
+        const buttonTextInput = document.getElementById("buttonTextInput");
+        const buttonUrlInput = document.getElementById("buttonUrlInput");
+        const imageUrlInput = document.getElementById("imageUrlInput");
+
+        const desktopPreviewContainer = document.getElementById("desktopPreviewContainer");
+
+        const codeOutput = document.getElementById("codeOutput");
+        const copyCodeBtn = document.getElementById("copyCodeBtn");
+        const copyNotice = document.getElementById("copyNotice");
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function escapeCssUrl(str) {
+            return String(str).replace(/"/g, '\\"').replace(/\\/g, '\\\\');
+        }
+
+        function pushGtmEvent(eventName, properties = {}) {
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    event: eventName,
+                    ...properties
+                });
+            } else {
+                console.warn("dataLayer 未定義，無法推送 GTM 事件:", eventName);
+            }
+        }
+        
+        // Function to generate preview HTML
+        function generatePreviewHtml(title, body, buttonText, buttonUrl, imageUrl) {
+            const highlightSpan = `<span class="font-bold text-cta-custom">${escapeHtml(FIXED_HIGHLIGHT_TEXT)}</span>`;
+            const bgStyle = imageUrl ? `style="background-image: url('${escapeCssUrl(imageUrl)}')"` : '';
+
+            return `
+            <div class="flex flex-col sm:flex-row items-stretch">
+                <div
+                    class="w-full sm:w-2/5 image-placeholder-box aspect-video sm:aspect-video"
+                    ${bgStyle}
+                ></div>
+                <div class="w-full sm:w-3/5 p-6 space-y-3 flex flex-col justify-center">
+                    <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">
+                        ${escapeHtml(title)}
+                    </h2>
+                    <p class="text-base text-gray-700">
+                        ${highlightSpan}
+                        <span> ${escapeHtml(body)}</span>
+                    </p>
+                    <a
+                        href="${escapeHtml(buttonUrl) || '#'}"
+                        target="_blank"
+                        rel="sponsored"
+                        class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-semibold rounded-lg text-white cta-button-custom transition duration-150 ease-in-out transform hover:scale-105"
+                    >
+                        ${escapeHtml(buttonText)}
+                    </a>
+                </div>
+            </div>`;
+        }
+
+        // Function to generate final output HTML
+        function generateOutputHtml(title, body, buttonText, buttonUrl, imageUrl) {
+            const bgImage = imageUrl ? `background-image: url('${escapeCssUrl(imageUrl)}');` : '';
+
+            // 產生 GTM 程式碼片段
+            const gtmHeadSnippet = `
+    <!-- Google Tag Manager for BN tracking -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','${GTM_ID}');<\/script>
+    <!-- End Google Tag Manager -->`;
+            
+            const gtmBodySnippet = `
+    <!-- Google Tag Manager (noscript) for BN tracking -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->`;
+
+            return `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(title)}</title>
+    ${gtmHeadSnippet} <!-- GTM Head Snippet 植入點 -->
+    <!-- 載入 Tailwind CSS CDN，確保樣式能被解析 --><script src="https://cdn.tailwindcss.com"><\/script>
+    <style>
+      .camp-banner-container {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+      .image-placeholder-box {
+          ${bgImage}
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+      }
+      .cta-button-custom {
+          background-color: #f90281;
+      }
+      .cta-button-custom:hover {
+          background-color: #e10277;
+      }
+      .text-cta-custom {
+          color: #f90281;
+      }
+    </style>
+</head>
+<body class="p-2">
+    ${gtmBodySnippet} <!-- GTM Body Snippet 植入點 -->
+    <div class="camp-banner-container bg-white mx-auto my-4 rounded-xl border border-gray-100 overflow-hidden shadow-lg max-w-xl">
+        <div class="flex flex-col sm:flex-row items-stretch">
+            <div class="w-full sm:w-2/5 image-placeholder-box aspect-video sm:aspect-video">
+            </div>
+            <div class="w-full sm:w-3/5 p-6 space-y-3 flex flex-col justify-center">
+                <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">
+                    ${escapeHtml(title)}
+                </h2>
+                <p class="text-base text-gray-700">
+                    <span class="font-bold text-cta-custom">${escapeHtml(FIXED_HIGHLIGHT_TEXT)}</span>${escapeHtml(body)}
+                </p>
+                <a href="${escapeHtml(buttonUrl)}"
+                    target="_blank"
+                    rel="sponsored"
+                    class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-semibold rounded-lg text-white cta-button-custom transition duration-150 ease-in-out transform hover:scale-105">
+                    ${escapeHtml(buttonText)}
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
+        function updateAll() {
+            const title = titleInput.value || "";
+            const body = bodyInput.value || "";
+            const buttonText = buttonTextInput.value || "";
+            const buttonUrl = buttonUrlInput.value || "";
+            
+            const finalImageUrl = imageUrlInput.value || ""; 
+
+            const previewHtmlContent = generatePreviewHtml(title, body, buttonText, buttonUrl, finalImageUrl);
+            desktopPreviewContainer.innerHTML = previewHtmlContent;
+
+            const outputHtml = generateOutputHtml(title, body, buttonText, buttonUrl, finalImageUrl);
+            codeOutput.value = outputHtml;
+            
+            copyNotice.classList.add("hidden");
+        }
+
+        [titleInput, bodyInput, buttonTextInput, buttonUrlInput, imageUrlInput].forEach(
+            (el) => {
+                el.addEventListener("input", updateAll);
+            }
+        );
+
+        window.onload = updateAll;
+
+        copyCodeBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(codeOutput.value);
+                copyNotice.classList.remove("hidden");
+                
+                pushGtmEvent('aitool_success', {
+                    'tool_name': 'bn_generator',
+                    'bn_title': titleInput.value || ''
+                });
+            } catch (e) {
+                codeOutput.select();
+                document.execCommand("copy");
+                copyNotice.classList.remove("hidden");
+                
+                pushGtmEvent('aitool_success', {
+                    'tool_name': 'bn_generator',
+                    'bn_title': titleInput.value || ''
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
